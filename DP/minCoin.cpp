@@ -19,7 +19,21 @@ using namespace std;
         
         //dp based
 
-        int
+        int n = nums.size();
+		sort(nums.begin(), nums.end());
+		vector<long long int > dp(amount + 1, INT_MAX);
+		// Base Case
+		dp[0] = 0;
+		// Compute minimum coins required for all 
+    	// values from 1 to amount 
+		for(int  i = 1; i <= amount; i++)
+			// Go through all coins smaller than i
+			for(int j = 0; j < n and nums[j] <= i; j++)
+				dp[i] = min(dp[i], 1LL + dp[i - nums[j]]);
+
+		if(dp[amount] >= INT_MAX)
+			return -1;
+		return int(dp[amount]);
           
     }  
 

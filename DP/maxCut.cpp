@@ -48,6 +48,7 @@ int t;cin>>t;
 while(t--){
     int n,a,b,c; cin>>n>>a>>b>>c;
     cout<<maxCuts(n,a,b,c)<<"\n";
+    getchar();
 }
 
 }
