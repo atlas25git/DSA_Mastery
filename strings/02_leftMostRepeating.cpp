@@ -23,9 +23,9 @@ int firstRepeating(string& str)
 	int res = INT_MAX; 
 	for (int i = 0; i < str.length(); i++) { 
 		if (firstIndex[str[i]] == -1) 
-		firstIndex[str[i]] = i; 
+		firstIndex[str[i]] = i; //storing the leftmost occr. of the first appearence
 		else
-		res = min(res, firstIndex[str[i]]); 
+		res = min(res, firstIndex[str[i]]); //since we are storing the leftmost occurence in the res, subsequently it will be maintained with min.
 	} 
 
 	return (res == INT_MAX) ? -1 : res; 

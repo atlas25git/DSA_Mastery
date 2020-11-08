@@ -7,14 +7,18 @@ int ser(string &str)
     int fI[CHAR];
     fill(fI,fI+CHAR,-1);
     
-    for(int i=0;i<str.length();i++){
+    for(int i=0;i<str.length();i++)
+    {
         if(fI[str[i]]==-1)
         fI[str[i]]=i;
         else
+        //eliminating all of the repeating chars.
         fI[str[i]]=-2;
     }
     int res=INT_MAX;
     for(int i=0;i<CHAR;i++){
+        //therefore the leftmost non repeating will be 
+        //the least of index.
         if(fI[i]>=0)res=min(res,fI[i]);
     }
     return (res==INT_MAX)?-1:res;

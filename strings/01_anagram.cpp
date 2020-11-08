@@ -1,6 +1,8 @@
 #include <bits/stdc++.h>
 using namespace std;
 
+//in anagrams order of appearence of charachters may differ.
+
 string ser(string s1,string s2){
     int n1=s1.length();
     int n2= s2.length();
