@@ -77,4 +77,6 @@
 |skipped as it brings the comparison for the point of symmetry,                     | 
 |and if the lps[j-1]==0,it means there are no such symmetries or comarison to be    |
 |made.                                                                              |
+|In subsequent steps the pattern is fwded to see if there is some value for which   |
+|it might be so that the pattern could be found at present i's value.               |
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
