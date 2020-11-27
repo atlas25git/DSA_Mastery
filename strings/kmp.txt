@@ -26,3 +26,32 @@
 |        lps[i]=lps(str,i+1);                                                       |
 | }                                                                                 |
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~IMPV> CODE~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+|Basic Ideas:{str - string, len= len of lps, lps[]}                                 | 
+|1)if str[i] = str[len], then lps[i] = len+1, len++;                                |
+|2)if str[i] != str[len],                                                           |
+|        -->a) if len==0, lps[i]=0;                                                 |
+|        -->b) else len=lps[len-1];                                                 |
+|            --> now again compare str[i] and str[len].                             |
+|                                                                                   |
+|void flps(str,lps[])                                                               |
+|{                                                                                  |                                        
+|    int n = str.length(),len=0;                                                    |
+|    lps[0] = 0;                                                                    |
+|    int i = 1;                                                                     |
+|    while(i<n)                                                                     |
+|    {                                                                              |
+|        if(str[i] == str[len])                                                     |
+|        {                                                                          |
+|            len++; lps[i]=len; i++;                                                |
+|        }                                                                          |
+|        else{                                                                      |
+|            if(len==0){                                                            |
+|                lps[i]=0;i++;                                                      |
+|            }                                                                      |
+|            else {                                                                 |
+|                len = lps[len - 1];                                                |
+|            }                                                                      |
+|        }                                                                          |
+|    }                                                                              |
+|}                                                                                  |
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
