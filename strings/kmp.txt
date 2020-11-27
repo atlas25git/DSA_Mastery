@@ -1,0 +1,28 @@
+|~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~KMP~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~|
+|Proper suffix's length smaller than the txt.-'1'                                   |                     
+| str = "abacabad"                                                                  |        
+| lps[0,0,1,0,1,2,3,0]                                                              |
+|                                                                                   |
+| str="a b b a b b"                                                                 |
+| lps[0,0,0,1,2,3]                                                                  |
+|                                                                                   |
+| ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~CODE~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+| T.C: O(n3);                                                                       |
+| int lps(str,n){                                                                   |
+|     for(len=n-1;len>0;len--) //len-1 bcoz (1)                                     |
+|     {                                                                             |
+|         bool flag = true;                                                         |
+|         for(int i=0;i<len;i++)                                                    |
+|            if(str[i] != str[n-len-i])                                             |
+|                    flag=false;                                                    |
+|            if(flag ==true)                                                        |
+|                return len; //coz the further iterations will only                 |
+|                               give smallervalue.                                  |
+|       }                                                                           |
+|     return 0;                                                                     |
+| }                                                                                 |
+| void fill_lps(str,lps[]){                                                         |
+|     for(int i=0;i<str.length();i++)                                               |
+|        lps[i]=lps(str,i+1);                                                       |
+| }                                                                                 |
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~IMPV> CODE~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

@@ -1,0 +1,47 @@
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~RabinKArp~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+in rolling hash vid. he is referring to value at i'th index, by txt[i],
+to calculate pattern's hash value, we use the following algo:-
+we use the following formula : p= for(i=0:m-1) {p*d + pat[i]};
+as p=0,for  i=0: p=0*d + p[0];
+            i=1: p=(0*d + p[0])*d + p[1];
+                    ~~~~~~~~~~~~~
+                         p
+            i=2: p=(0*d + p[0])*d + p[1])*d + p[2];
+                    ~~~~~~~~~~~~~~~~~~~~~~~~
+                            p
+in the following way the formula is formed.
+
+Time Complexity: same as naive in worse case , aaaaa, many matches; O((N-m+1)xm);
+used for multiple patterns to be searched.
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~CODE~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+void rbs(pat,txt,m,n)
+{
+    int h=1;
+    for(i=1,i<=m-1;i++)h=(h*d)%q //pre computing the value of d^(m-1)%q
+
+    int p=0,t=0;
+    for(i=0,i<m,i++){
+        p=(p*d+pat[i])%q;
+        t=(t*d+txt[i])%q;
+    }
+    for(i=0,i<n-m;i++)
+    {
+        if(p==t){
+            bool flag = true;
+            for(j=0,j<m;j++)                               | for checking the hit
+                if(txt[i+j]!=pat[j]){flag=false;break;}    | by chance again iteratively
+                if(flag==true){print(i);}                  |
+        }
+       if ( i < N-M )  
+        {  
+            t = (d*(t - txt[i]*h) + txt[i+M])%q;   // same as: (d%q){t - txt[i]*h} + txt[i+m]%q;
+  
+            // We might get negative value of t, converting it  
+            // to positive  
+            if (t < 0)  
+            t = (t + q);  
+        }  
+    }
+
+}
