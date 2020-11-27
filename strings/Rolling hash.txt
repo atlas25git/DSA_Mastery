@@ -1,4 +1,4 @@
-|~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~RabinKArp~~~~~~~~~~~~~~~~~~~~~|
+|~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~RabinKArp~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~|
 |in rolling hash vid. he is referring to value at i'th index, by txt[i],             |
 |to calculate pattern's hash value, we use the following algo:-                      |
 |we use the following formula : p= for(i=0:m-1) {p*d + pat[i]};                      |
@@ -14,7 +14,7 @@
 |Time Complexity: same as naive in worse case , aaaaa, many matches; O((N-m+1)xm);   |
 |used for multiple patterns to be searched.                                          |
 |                                                                                    |
-|~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~CODE~~~~~~~~~~~~~~~~~~~~~~~~~|
+|~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~CODE~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~|
 |void rbs(pat,txt,m,n)                                                               |
 |{                                                                                   |
 |    int h=1;                                                                        |
