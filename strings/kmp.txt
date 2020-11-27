@@ -25,7 +25,7 @@
 |     for(int i=0;i<str.length();i++)                                               |
 |        lps[i]=lps(str,i+1);                                                       |
 | }                                                                                 |
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~IMPV> CODE~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~LPS:Array-CODE~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 |Basic Ideas:{str - string, len= len of lps, lps[]}                                 | 
 |1)if str[i] = str[len], then lps[i] = len+1, len++;                                |
 |2)if str[i] != str[len],                                                           |
@@ -51,6 +51,25 @@
 |            else {                                                                 |
 |                len = lps[len - 1];                                                |
 |            }                                                                      |
+|        }                                                                          |
+|    }                                                                              |
+|}                                                                                  |
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~KMP~CODE~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+|Void KMP(pat,txt)                                                                  |
+|{                                                                                  |
+|    int n=txt.length();                                                            |
+|    int m=pat.length();                                                            |
+|    int lps[M];//lps array of pattern.                                             |
+|    fill_lps(pat,lps);                                                             |
+|    int i=0,j=0;                                                                   |
+|    while(i<N)                                                                     |
+|    {                                                                              |
+|        if(pat[j] == txt[i]){i++,j++;}                                             |
+|        if(j==m){print(i-j); j = lps[j-1];}                                        |
+|        else if(i<n && pat[j]!=txt[i])                                             |
+|        {                                                                          |
+|            if(j==0){i++};                                                         |
+|            else{j=lps[j-1];}                                                      |
 |        }                                                                          |
 |    }                                                                              |
 |}                                                                                  |
