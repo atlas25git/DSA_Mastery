@@ -73,4 +73,8 @@
 |        }                                                                          |
 |    }                                                                              |
 |}                                                                                  |
+|Here the use of j=lps[j-1],tells us that for those many charachters comparison can |
+|skipped as it brings the comparison for the point of symmetry,                     | 
+|and if the lps[j-1]==0,it means there are no such symmetries or comarison to be    |
+|made.                                                                              |
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
