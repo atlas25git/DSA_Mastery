@@ -1,5 +1,5 @@
 #include<bits/stdc++.h>
-#include<sys/time.h>
+#include<sys/timeb.h>
 
 typedef long long ll;
 using namespace std;
@@ -26,7 +26,7 @@ int main(){
     
     strlr(str);
     ll endTime = getTimeInMicroSeconds();
-    cout<<str<<" "<<endTime-startTime<<"\n";
+    cout<<str<<" "<<startTime-endTime<<"\n";
 }
 
 void strlr(char* s){
