@@ -1,3 +1,18 @@
+int MinHeap::extractMin() {
+    if (heap_size <= 0) return -1;
+    if (heap_size == 1) {
+        heap_size--;
+        return harr[0];
+    }
+
+    int root = harr[0];
+    harr[0] = harr[heap_size - 1]; // putting last element at first index
+    harr[heap_size - 1] = 0;
+    heap_size--;
+
+    MinHeapify(0); // calling Minheapify
+
+    return root;
 // { Driver Code Starts
 // Initial Template for C++
 
@@ -87,27 +102,56 @@ struct MinHeap
 // You need to write code for below three functions
 
 /* Removes min element from min heap and returns it */
+int MinHeap::extractMin() {
+    // Your code here
+    if(heap_size<1)return -1;
+    if(heap_size==1){heap_size--;return harr[0];}
+    swap(harr[0],harr[heap_size-1]);
+    heap_size--;
+    int ans = harr[heap_size];
+    MinHeapify(0);
+    return ans;
+}
+// int MinHeap::extractMin() {
+//     if (heap_size <= 0) return -1;
+//     if (heap_size == 1) {
+//         heap_size--;
+//         return harr[0];
+//     }
+
+//     int root = harr[0];
+//     harr[0] = harr[heap_size - 1]; // putting last element at first index
+//     harr[heap_size - 1] = 0;
+//     heap_size--;
+
+//     MinHeapify(0); // calling Minheapify
+
+//     return root;
+// }
+
+/* Removes element from position x in the min heap  */
+void MinHeap::deleteKey(int i) {
+    // Your code here
+    if(heap_size>i){
+        decreaseKey(i,INT_MIN);
+        extractMin();
+    }
+}
+
+/* Inserts an element at position x into the min heap*/
 void MinHeap::insertKey(int k) {
-    /* if (heap_size == capacity)
-     {
-         cout << "\nOverflow: Could not insertKey\n";
-         return;
-     }
-  */
-
-    harr[heap_size] = k;
-    int i = heap_size;
+    // Your code here
+    if(heap_size>=capacity)return;
+    harr[heap_size] = k; 
     heap_size++;
-    
-
-    // iterating upto first index till parent is larger than the the child
-    while (i != 0 && harr[parent(i)] > harr[i]) {
-        swap(harr[i], harr[parent(i)]);
+    for(int i = heap_size-1; i!=0 && harr[i]<harr[parent(i)];)
+    {
+        swap(harr[i],harr[parent(i)]);
         i = parent(i);
     }
 }
 
-// Function to change value and store min value at first index
+// Decrease Key operation, helps in deleting key from heap
 void MinHeap::decreaseKey(int i, int new_val) {
     harr[i] = new_val;
     while (i != 0 && harr[parent(i)] > harr[i]) {
@@ -116,48 +160,17 @@ void MinHeap::decreaseKey(int i, int new_val) {
     }
 }
 
-// to extract minimum value in heap and then storing next mi value at first
-// index
-int MinHeap::extractMin() {
-    if (heap_size <= 0) return -1;
-    if (heap_size == 1) {
-        heap_size--;
-        return harr[0];
-    }
-
-    int root = harr[0];
-    harr[0] = harr[heap_size - 1]; // putting last element at first index
-    harr[heap_size - 1] = 0;
-    heap_size--;
-
-    MinHeapify(0); // calling Minheapify
-
-    return root;
-}
-
-void MinHeap::deleteKey(int i) {
-    if (i < heap_size) {
-        decreaseKey(i, INT_MIN);
-        extractMin();
-    }
-}
-
-// Function to heapify as to store minimum value at first index
+/* You may call below MinHeapify function in
+   above codes. Please do not delete this code
+   if you are not writing your own MinHeapify */
 void MinHeap::MinHeapify(int i) {
     int l = left(i);
     int r = right(i);
     int smallest = i;
-    if (l < heap_size &&
-        harr[l] <
-            harr[smallest]) // if value at smallest is larger change smallest
-        smallest = l;
-    if (r < heap_size &&
-        harr[r] <
-            harr[smallest]) // if value at smallest is larger change smallest
-        smallest = r;
-    if (smallest != i) // if smallest is not same as initial value, only then
-    {
+    if (l < heap_size && harr[l] < harr[i]) smallest = l;
+    if (r < heap_size && harr[r] < harr[smallest]) smallest = r;
+    if (smallest != i) {
         swap(harr[i], harr[smallest]);
-        MinHeapify(smallest); // recusrsively call Minheapify for smallest variable
+        MinHeapify(smallest);
     }
 }
