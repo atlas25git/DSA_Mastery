@@ -1,117 +1,80 @@
 // { Driver Code Starts
-//Initial template for C++
-
-#include <bits/stdc++.h>
+#include<bits/stdc++.h>
 using namespace std;
 
 
  // } Driver Code Ends
-//User function template for C++
+
+
 
 class Solution{
-public:
-    struct Interval
-    {
-        int buy;
-        int sell;
-    };
-    //Function to find the days of buying and selling stock for max profit.
-    vector<vector<int> > stockBuySell(vector<int> A, int n)
-    {
-        vector<vector<int> > result;
-      //Prices must be given for at least two days else return the empty result.
-        if (n == 1)    
-            return result;
-     
-        int count = 0;
-     
-        //Creating solution vector.
-        Interval sol[n/2 + 1];
-     
-        //Traversing through given price array.
-        int i = 0;
-        while (i < n-1)
-        {
-            //Finding Local Minima. Note that the limit of loop is (n-2)
-            //as we are comparing present element to the next element. 
-            while ((i < n-1) && (A[i+1] <= A[i]))
-                i++;
-     
-            //If we reach the end, we break the loop as no further
-            //solution is possible.
-            if (i == n-1)
-                break;
-     
-            //Storing the index of minima which gives the day of buying stock.
-            sol[count].buy = i++;
-     
-            //Finding Local Maxima. Note that the limit of loop is (n-1)
-            //as we are comparing present element to previous element.
-            while ((i < n) && (A[i] >= A[i-1]))
-                i++;
-     
-            //Storing the index of maxima which gives the day of selling stock.
-            sol[count].sell = i-1;
-     
-            //Incrementing count of buy/sell pairs.
-            count++;
-        }
+    public:
         
-        if (count == 0)
-            return result;
-        else
-        {
-            //Storing the buy/sell pairs in a list.
-            for (int i = 0; i < count; i++){
-                vector<int> temp;
-                temp.push_back(sol[i].buy);
-                temp.push_back(sol[i].sell);
-                result.push_back(temp);
-            }
-
+    // Function to find the maximum index difference.
+    int maxIndexDiff(int arr[], int n) 
+    { 
+        if(n==1){
+            return 0;
         }
-        //returning the result.
-        return result;
+        int maxDiff; 
+        int i, j; 
+        
+        int *LMin = new int[n];
+        int *RMax = new int[n];
+      
+        //Constructing LMin[] such that LMin[i] stores the minimum value 
+        //from (arr[0], arr[1], ... arr[i]).
+        LMin[0] = arr[0]; 
+        for (i = 1; i < n; ++i) 
+            LMin[i] = min(arr[i], LMin[i-1]); 
+      
+        //Constructing RMax[] such that RMax[j] stores the maximum value 
+        //from (arr[j], arr[j+1], ..arr[n-1]).
+        RMax[n-1] = arr[n-1]; 
+        for (j = n-2; j >= 0; --j) 
+            RMax[j] = max(arr[j], RMax[j+1]); 
+         
+        i = 0, j = 0, maxDiff = -1; 
+        //Traversing both arrays from left to right to find optimum j-i.
+        //This process is similar to merge() of MergeSort.
+        while (j < n && i < n) 
+        { 
+            if (LMin[i] <= RMax[j]) 
+            { 
+                //Updating the maximum difference.
+                maxDiff = max(maxDiff, j-i); 
+                j = j + 1; 
+            } 
+            else
+                i = i+1; 
+        } 
+        //returning the maximum difference.
+        return maxDiff; 
     }
 };
 
 // { Driver Code Starts.
-
-int check(vector<vector<int>> ans, vector<int> A, int p)
+  
+/* Driver program to test above functions */
+int main() 
 {
-    int c = 0;
-    for(int i=0; i<ans.size(); i++)
-        c += A[ans[i][1]]-A[ans[i][0]];
-    return (c==p) ? 1 : 0;
-}
-
-int main()
-{   
-    int t;
-    cin>>t;
-    while(t--){
-        int n;
-        cin>>n;
-        vector<int> A(n);
-        for (int i=0; i<n; ++i){
-            cin>>A[i];
-        }
+    int T;
+    //testcases
+    cin>>T;
+    while(T--){
+        int num;
+        //size of array
+        cin>>num;
+        int arr[num];
+        
+        //inserting elements
+        for (int i = 0; i<num; i++)
+            cin>>arr[i];
         Solution ob;
-        vector<vector<int> > ans = ob.stockBuySell(A, n);
-        int p = 0;
-        for(int i=0; i<n-1; i++)
-        {
-            int x = A[i+1]-A[i];
-            if(x>0)
-                p += x;
-        }
-        if(ans.size()==0)
-            cout<<"No Profit";
-        else{
-            cout<<check(ans,A,p);
-        }cout<<endl;
+        
+        //calling maxIndexDiff() function
+        cout<<ob.maxIndexDiff(arr, num)<<endl;    
+        
     }
     return 0;
-}
-
-  // } Driver Code Ends
+}   // } Driver Code Ends
